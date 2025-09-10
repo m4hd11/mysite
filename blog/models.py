@@ -24,5 +24,8 @@ class Post(models.Model):
         ordering = ['created_date']
         
     def __str__(self):
-        return " {} - {} ".format(self.title, self.id)
+        return self.title
+    
+    def snippets(self):
+         return self.content[:100] + ' ... '
     
