@@ -4,10 +4,12 @@ from blog.models import Post
 
 # Create your views here.
 
-def blog_view(request, cat_name=None):
+def blog_view(request, **kwargs):
     posts = Post.objects.filter(published_date__lte=timezone.now(), status=1).order_by('-published_date')
-    if cat_name:
-        posts = posts.filter(category__name=cat_name)
+    if kwargs.get('cat_name'):
+        posts = posts.filter(category__name=kwargs['cat_name'])
+    if kwargs.get('author_username'):
+        posts = posts.filter(author__username=kwargs['author_username'])
     context = {
         'posts': posts
     }
@@ -34,8 +36,8 @@ def blog_single(request, pid):
     
     return render(request, 'blog/blog-single.html', context)
 
-def test(request, ):
-    return render(request, 'test.html')
+# def test(request, ):
+#     return render(request, 'test.html')
 
 # def blog_category(request, cat_name):
 #     posts = Post.objects.filter(status=1)
@@ -46,4 +48,18 @@ def test(request, ):
 #     return render(request, 'blog/blog-home.html', context)
 
 
+def blog_search(request):
+    
+    # posts = Post.objects.filter(status=1)
+    # if request.method == 'GET':
+    #     posts = posts.filter(content__contains=request.GET.get('s'))
+    
+    posts = Post.objects.filter(status=1)
+    if request.method == 'GET':
+        if s := request.GET.get('s'):
+            posts = posts.filter(content__icontains=s)
 
+    context = {
+        'posts': posts
+    }
+    return render(request, 'blog/blog-home.html', context)
