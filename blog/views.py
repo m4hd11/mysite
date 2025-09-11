@@ -4,8 +4,10 @@ from blog.models import Post
 
 # Create your views here.
 
-def blog_view(request):
+def blog_view(request, cat_name=None):
     posts = Post.objects.filter(published_date__lte=timezone.now(), status=1).order_by('-published_date')
+    if cat_name:
+        posts = posts.filter(category__name=cat_name)
     context = {
         'posts': posts
     }
@@ -34,4 +36,14 @@ def blog_single(request, pid):
 
 def test(request, ):
     return render(request, 'test.html')
+
+# def blog_category(request, cat_name):
+#     posts = Post.objects.filter(status=1)
+#     posts = posts.filter(category__name=cat_name)
+#     context = {
+#         'posts': posts
+#     }
+#     return render(request, 'blog/blog-home.html', context)
+
+
 
