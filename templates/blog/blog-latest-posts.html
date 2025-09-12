@@ -19,7 +19,7 @@
         <div class="single-recent-blog-post item">
           <div class="thumb">
             {% if post.image %}
-              <img class="img-fluid" src="{{ post.image.url }}" alt="{{ post.title }}" />
+            <a href="{% url 'blog:single' pid=post.id %}"><img class="img-fluid" src="{{ post.image.url }}" alt="{{ post.title }}" /></a>
             {% else %}
               <img class="img-fluid" src="{% static 'img/default.jpg' %}" alt="{{ post.title }}" />
             {% endif %}
