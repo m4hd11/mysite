@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from website.models import Contact
-from website.forms import NameForm, ContactForm, NewsletterForm
+from website.forms import ContactForm, NewsletterForm
 from django.contrib import messages
 
 def index_view(request):
@@ -16,24 +16,28 @@ def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            ticket = form.save(commit=False)
+            ticket.name = "Anonymous"
+            ticket.save()
+
             messages.add_message(request, messages.SUCCESS, 'Your ticket submited successfully!')
         else:
             messages.add_message(request, messages.ERROR, 'Your ticket didnt submited!')
-    form = ContactForm()
+    else:
+        form = ContactForm()
     return render(request, 'website/contact.html', {'form':form})
 
-def test_view(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponse('done')
-        else:
-            return HttpResponse('not valid!')
+# def test_view(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponse('done')
+#         else:
+#             return HttpResponse('not valid!')
         
-    form = ContactForm()
-    return render(request, 'test.html', {'form':form})
+#     form = ContactForm()
+#     return render(request, 'test.html', {'form':form})
 
 def newsletter_view(request):
     if request.method == 'POST':
