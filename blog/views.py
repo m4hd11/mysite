@@ -44,7 +44,7 @@ def blog_single(request, pid):
     
     return render(request, 'blog/blog-single.html', context)
 
-# def test(request, ):
+# def test(request):
 #     return render(request, 'test.html')
 
 # def blog_category(request, cat_name):
