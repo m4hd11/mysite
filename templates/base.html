@@ -210,26 +210,35 @@
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/mail-script.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-    {% if messages %}
-    <div id="popup-messages" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert"
-                 style="min-width: 250px; box-shadow: 0px 4px 12px rgba(0,0,0,0.2);">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"
-                        style="background: none; border: none; font-size: 20px;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endfor %}
-    </div>
+{% if messages %}
+<div id="popup-messages" style="
+    position: fixed;
+    top: 20px;               /* فاصله از بالای صفحه */
+    left: 50%;               /* وسط افقی */
+    transform: translateX(-50%);  /* وسط کردن دقیق */
+    z-index: 9999;
+    text-align: center;
+">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert"
+             style="min-width: 300px; box-shadow: 0px 4px 12px rgba(0,0,0,0.2); margin-bottom: 10px;">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                    style="background: none; border: none; font-size: 20px;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+</div>
 
-    <script>
-        setTimeout(() => {
-            const popup = document.getElementById("popup-messages");
-            if (popup) popup.style.display = "none";
-        }, 4000);
-    </script>
-    {% endif %}
+<script>
+    // بعد از 4 ثانیه pop-up خودکار بسته شود
+    setTimeout(() => {
+        const popup = document.getElementById("popup-messages");
+        if (popup) popup.style.display = "none";
+    }, 4000);
+</script>
+{% endif %}
+
   </body>
 </html>
