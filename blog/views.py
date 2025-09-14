@@ -1,7 +1,9 @@
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
-from blog.models import Post
+from blog.models import Post, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from blog.forms import CommentForm
+from django.contrib import messages
 # Create your views here.
 
 def blog_view(request, **kwargs):
@@ -25,25 +27,42 @@ def blog_view(request, **kwargs):
     }
     return render(request, 'blog/blog-home.html', context)
 
-def blog_single(request, pid):
-    posts = list(Post.objects.filter(status=1, published_date__lte=timezone.now()).order_by('-published_date'))
 
-    post = get_object_or_404(Post, pk=pid, status=1)
+def blog_single(request, pid):
+    post = get_object_or_404(Post, id=pid, status=1, published_date__lte=timezone.now())  
 
     post.counted_views += 1
     post.save(update_fields=['counted_views'])
 
+    posts = list(Post.objects.filter(status=1, published_date__lte=timezone.now()).order_by('-published_date'))
     current_index = posts.index(post)
-
     prev_post = posts[current_index - 1] if current_index > 0 else None
     next_post = posts[current_index + 1] if current_index < len(posts) - 1 else None
+
+
+    comments = Comment.objects.filter(post=post, approved=True)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post   
+            if not comment.subject:
+                comment.subject = None
+            comment.save()
+            messages.add_message(request, messages.SUCCESS, 'Your comment submitted successfully!')
+        else:
+            messages.add_message(request, messages.ERROR, 'Your comment did not submit!')
+    else:
+        form = CommentForm()
 
     context = {
         'post': post,
         'prev_post': prev_post,
-        'next_post': next_post
+        'next_post': next_post,
+        'comments': comments,
+        'form': form
     }
-    
     return render(request, 'blog/blog-single.html', context)
 
 # def test(request):
