@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'captcha',
     'robots',
     'debug_toolbar',
     'taggit',
@@ -70,7 +71,7 @@ SUMMERNOTE_CONFIG = {
         # Change editor size
         'width': '100%',
         'height': '480',
-        
+
         # Toolbar customization
         # https://summernote.org/deep-dive/#custom-toolbar-popover
         'toolbar': [
