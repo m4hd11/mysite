@@ -46,9 +46,12 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser and start ex
 
 ```
 mysite/
-├── travel/           # Django app for travel features
+├── mysite/           # Main Django settings
+├── blog/             # Django app for blog features
+├── website/          # Django app for homepage features
+├── media/            # uploaded images
 ├── templates/        # HTML templates
-├── static/           # CSS, JS, images
+├── statics/          # CSS, JS, images
 ├── requirements.txt  # Python dependencies
 ```
 
