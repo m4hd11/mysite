@@ -29,7 +29,7 @@
               <ul>
                 {% for cat in post.category.all %}
                 <li>
-                  {{ post.tags.all|join:", " }}
+                  <!-- {{ post.tags.all|join:", " }} -->
                   <a href="{% url 'blog:category' cat_name=cat.name %}">{{ cat.name }}</a>
                 </li>
                 {% endfor %}
