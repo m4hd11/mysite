@@ -6,6 +6,7 @@ from blog.forms import CommentForm
 from django.contrib import messages
 # Create your views here.
 
+
 def blog_view(request, **kwargs):
     posts = Post.objects.filter(published_date__lte=timezone.now(), status=1).order_by('-published_date')
     if kwargs.get('cat_name') != None:
