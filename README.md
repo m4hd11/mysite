@@ -49,6 +49,7 @@ mysite/
 ├── mysite/           # Main Django settings
 ├── blog/             # Django app for blog features
 ├── website/          # Django app for homepage features
+├── accounts/         # Django app for users authentication
 ├── media/            # uploaded images
 ├── templates/        # HTML templates
 ├── statics/          # CSS, JS, images
