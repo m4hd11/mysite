@@ -7,22 +7,22 @@ from django.urls import reverse
 # Create your views here.
 
 def login_View(request):
-    if not request.user.is_authenticated:
-        if request.method == "POST":
-            form = AuthenticationForm(request=request, data=request.POST)
-            if form.is_valid():
-                username = form.cleaned_data.get('username')
-                password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('/')
-            
-        form = AuthenticationForm()
-        context = {'form': form}
-        return render(request, 'accounts/login.html', context)
-    else:
+    if request.user.is_authenticated:
         return redirect('/')
+
+    next_url = request.POST.get('next') or request.GET.get('next') or '/'
+
+    if request.method == "POST":
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect(next_url)
+    else:
+        form = AuthenticationForm()
+
+    context = {'form': form, 'next': next_url}
+    return render(request, 'accounts/login.html', context)
     
 @login_required
 def logout_View(request):
