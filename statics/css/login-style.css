@@ -8346,3 +8346,32 @@ textarea.form-control {
         border: 1px solid transparent;
         background: #fbceb5;
         color: #fff; }
+
+
+.popup-message{
+    display: none;
+    position: fixed;      /* روی کل صفحه */
+    top: 20%;             /* کمی پایین‌تر از بالای صفحه */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #dc3545; /* قرمز برای خطا */
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    z-index: 9999;
+    width: 80%;           /* روی موبایل */
+    max-width: 400px;     /* روی دسکتاپ محدود */
+}
+
+/* می‌توانید فونت و اندازه را روی موبایل و دسکتاپ تنظیم کنید */
+@media (min-width: 768px) {
+    .popup-message {
+        font-size: 16px;
+        padding: 16px 24px;
+        display: inline-block;
+        white-space: nowrap;
+    }
+    
+}
