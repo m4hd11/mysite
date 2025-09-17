@@ -1,14 +1,14 @@
 {% load static %}
 
 <div class="single-sidebar-widget user-info-widget">
-    {# نمایش آواتار نویسنده یا تصویر دیفالت #}
-    {% if author and author.profile.avatar %}
+    {# آواتار نویسنده #}
+    {% if author and author.profile and author.profile.avatar %}
         <img src="{{ author.profile.avatar.url }}" alt="{{ author.get_full_name|default:author.username }}">
     {% else %}
         <img src="{% static 'img/blog/user-info.png' %}" alt="{{ author.get_full_name|default:'Unknown Author' }}">
     {% endif %}
 
-    {# نمایش نام کامل نویسنده و لینک به صفحه author #}
+    {# نام و فامیل نویسنده #}
     {% if author %}
         <a href="{% url 'blog:author' author_username=author.username %}">
             <h4>{{ author.first_name|default:author.username }} {{ author.last_name }}</h4>
