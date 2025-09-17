@@ -2371,7 +2371,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #logo {
-  scale: 0.8;
+  scale: 1;
+  margin-right: 30px;
 }
 
 #nav-menu-container {

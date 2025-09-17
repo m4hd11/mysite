@@ -3,10 +3,10 @@
 <section class="relative about-banner">
   <div class="overlay overlay-bg"></div>
   <div class="container">
-    <div class="row d-flex align-items-center justify-content-center">
+    <div class="row d-flex align-items-center justify-content-center pt-120">
       <div class="about-content col-lg-12">
-        <h1 class="text-white">{{ post.title }}</h1>
-        <p class="text-white link-nav">
+        <!-- <h1 class="text-white">{{ post.title }}</h1> -->
+        <p class="text-white link-nav mt-100">
           <a href="{% url 'website:index' %}">Home </a>
           <span class="lnr lnr-arrow-right"></span
           ><a href="{% url 'blog:index' %}">Blog </a>
@@ -79,22 +79,6 @@
             </h3>
             <p class="excert">
               {{ post.content|safe }}
-            </p>
-            <p>
-              Boot camps have its supporters and its detractors. Some people do
-              not understand why you should have to spend money on boot camp
-              when you can get the MCSE study materials yourself at a fraction
-              of the camp price. However, who has the willpower to actually sit
-              through a self-imposed MCSE training. who has the willpower to
-              actually sit through a self-imposed
-            </p>
-            <p>
-              Boot camps have its supporters and its detractors. Some people do
-              not understand why you should have to spend money on boot camp
-              when you can get the MCSE study materials yourself at a fraction
-              of the camp price. However, who has the willpower to actually sit
-              through a self-imposed MCSE training. who has the willpower to
-              actually sit through a self-imposed
             </p>
           </div>
         </div>
@@ -235,7 +219,7 @@
           
           {% include 'blog/blog-search.html' %}
 
-          {% include 'blog/blog-writer.html' %}
+          {% include 'blog/blog-writer.html' with author=post.author %}
           
           {% latestposts %}
 
