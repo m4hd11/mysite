@@ -8174,7 +8174,8 @@ h1, h2, h3, h4, h5,
   background: #fbceb5 !important; }
 
 .ftco-section {
-  padding: 7em 0; }
+  padding: 7em 0;
+ }
 
 .ftco-no-pt {
   padding-top: 0; }
@@ -8189,13 +8190,40 @@ h1, h2, h3, h4, h5,
 .img {
   background-size: cover;
   background-repeat: no-repeat;
-  /* background-position: center center; } */
+  background-position: center center;
+
+}
+
+.img::before,
+.img::after {
+  background: none !important;
+  content: none !important;
+}
+@media screen and (max-width: 768px) {
+  .img { 
+    min-height: 150vh;
+}
 }
 .login-wrap {
   position: relative;
-  color: rgba(255, 255, 255, 0.9); }
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 1;
+}
+
+/* .login-wrap::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;*
+  z-index: -1; 
+} */
+
+
   .login-wrap h3 {
-    font-weight: 300;
     color: #fff; }
   .login-wrap .social {
     width: 100%; }
@@ -8209,7 +8237,7 @@ h1, h2, h3, h4, h5,
         background: #000;
         color: #fff;
         border-color: #000; }
-
+        
 .form-group {
   position: relative; }
 
@@ -8223,7 +8251,7 @@ h1, h2, h3, h4, h5,
   color: rgba(255, 255, 255, 0.9); }
 
 .form-control {
-  background: transparent;
+  background: transparent !important;
   border: none;
   height: 50px;
   color: white !important;
@@ -8367,11 +8395,69 @@ textarea.form-control {
 
 /* می‌توانید فونت و اندازه را روی موبایل و دسکتاپ تنظیم کنید */
 @media (min-width: 768px) {
-    .popup-message {
+    .popup {
         font-size: 16px;
         padding: 16px 24px;
         display: inline-block;
         white-space: nowrap;
     }
     
+}
+
+
+.col-md-6.col-lg-4 {
+  position: relative;
+}
+
+.col-md-6.col-lg-4::before {
+  content: "";
+  position: absolute;
+  top: -140px;   /* برای اینکه Heading هم پوشیده بشه */
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 15px;
+  z-index: -1;
+}
+
+/* تغییر رنگ برای فرم‌های لاگین و ثبت‌نام */
+.login-wrap .form-control {
+  background-color: rgba(255, 255, 255, 0.1); /* نیمه‌شفاف */
+  color: #fff !important; /* متن سفید */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* رنگ placeholder */
+.login-wrap .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important; /* کمرنگ‌تر از متن اصلی */
+}
+
+
+@media screen and (max-width: 768px){
+  .col-md-6.col-lg-4 {
+  position: relative;
+}
+
+.col-md-6.col-lg-4::before {
+  content: "";
+  position: absolute;
+  top: -140px;   /* برای اینکه Heading هم پوشیده بشه */
+  left: 10px;
+  right: 10px;
+  bottom: -20px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 15px;
+  z-index: -1;
+}
+
+h3, .h3 {
+  font-size: 24px;
+}
+.heading-section {
+  font-size: 28px;
+}
+.login-wrap h3 {
+    font-size: 24px;
+}
 }
