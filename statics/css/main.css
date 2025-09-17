@@ -3762,7 +3762,8 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-size: 12px;
   font-weight: 500;
   padding: 8px 20px;
-  border-radius: 0;
+  border: none;
+  cursor: pointer;
 }
 
 .widget-wrap .newsletter-widget .input-group-text {
