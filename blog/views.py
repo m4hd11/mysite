@@ -11,27 +11,28 @@ from django.utils.http import urlencode
 
 
 def blog_view(request, **kwargs):
-    posts = Post.objects.filter(published_date__lte=timezone.now(), status=1).order_by('-published_date')
+    posts = Post.objects.filter(
+        published_date__lte=timezone.now(),
+        status=1
+    ).order_by('-published_date')
 
-
-    if kwargs.get('cat_name') != None:
+    if kwargs.get('cat_name') is not None:
         posts = posts.filter(category__name=kwargs['cat_name'])
-    if kwargs.get('author_username') != None:
+    if kwargs.get('author_username') is not None:
         posts = posts.filter(author__username=kwargs['author_username'])
-    if kwargs.get('tag_name') != None:
+    if kwargs.get('tag_name') is not None:
         posts = posts.filter(tags__name__in=[kwargs['tag_name']])
 
     last_post = posts.first()
     last_author = last_post.author if last_post else None
-    
-    posts = Paginator(posts, 3)
+
+    paginator = Paginator(posts, 3)
+    page_number = request.GET.get('page')
     try:
-        page_number = request.GET.get('page')
-        posts = posts.get_page(page_number)
-    except PageNotAnInteger:
-        posts = posts.get_page(1)
-    except EmptyPage:
-        posts = posts.get_page(1)
+        posts = paginator.get_page(page_number)
+    except (PageNotAnInteger, EmptyPage):
+        posts = paginator.get_page(1)
+
     context = {
         'posts': posts,
         'author': last_author,
@@ -40,7 +41,12 @@ def blog_view(request, **kwargs):
 
 
 def blog_single(request, pid):
-    post = get_object_or_404(Post, id=pid, status=1, published_date__lte=timezone.now())
+    post = get_object_or_404(
+        Post,
+        id=pid,
+        status=1,
+        published_date__lte=timezone.now()
+    )
 
     post.counted_views += 1
     post.save(update_fields=['counted_views'])
@@ -55,7 +61,7 @@ def blog_single(request, pid):
         query_string = urlencode({'next': request.get_full_path()})
         url = f"{login_url}?{query_string}"
         return HttpResponseRedirect(url)
-    
+
     comments = Comment.objects.filter(post=post, approved=True)
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -77,7 +83,7 @@ def blog_single(request, pid):
         'next_post': next_post,
         'comments': comments,
         'form': form,
-        'author': post.author,
+        'author': post.author,  # نویسنده همان پست
     }
     return render(request, 'blog/blog-single.html', context)
 
