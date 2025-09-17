@@ -8,7 +8,8 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <!-- Favicon-->
-    <link rel="shortcut icon" href="{% static 'img/fav.png" />
+    <link rel="shortcut icon" href="{% static 'img/fav.png' %}" />
+
     <!-- Author Meta -->
     <meta name="author" content="colorlib" />
     <!-- Meta Description -->
@@ -45,11 +46,19 @@
             <div class="col-lg-6 col-sm-6 col-6 header-top-left">
               <ul>
                 {% if request.user.is_authenticated %}
-                <li><a href="#">Logged in as {{ request.user.username }}</a></li>
-                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                <li>
+                  <div class="auth-buttons">
+                    <a href="#" class="user-info">Logged in as {{ request.user.username }}</a>
+                    <a href="{% url 'accounts:logout' %}" class="logout">Logout</a>
+                  </div>
+                </li>
                 {% else %}
-                <li><a href="{% url 'accounts:login' %}">Login</a></li>
-                <li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+                <li>
+                  <div class="auth-buttons">
+                    <a href="{% url 'accounts:login' %}" class="login">Login</a>
+                    <a href="{% url 'accounts:signup' %}" class="signup">Signup</a>
+                  </div>
+                </li>
                 {% endif %}
               </ul>
             </div>
@@ -85,9 +94,7 @@
     </header>
     <!-- #header -->
 
-    {% block content %} 
-
-    {% endblock %}
+    {% block content %} {% endblock %}
 
     <!-- start footer Area -->
     <footer class="footer-area section-gap">
@@ -110,18 +117,10 @@
               <div class="row">
                 <div class="col">
                   <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Feature</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                  </ul>
-                </div>
-                <div class="col">
-                  <ul>
-                    <li><a href="#">Team</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{% url 'website:index' %}">Home</a></li>
+                    <li><a href="{% url 'blog:index' %}">Blog</a></li>
+                    <li><a href="{% url 'website:about' %}">About</a></li>
+                    <li><a href="{% url 'website:contact' %}">Contact</a></li>
                   </ul>
                 </div>
               </div>
@@ -140,7 +139,7 @@
                   method="post"
                   class="subscription relative"
                 >
-                {% csrf_token %}
+                  {% csrf_token %}
                   <div class="input-group d-flex flex-row">
                     <input
                       name="email"
@@ -215,54 +214,90 @@
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/mail-script.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-{% if messages %}
-<div id="popup-messages" style="
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    text-align: center;
-">
-    {% for message in messages %}
-        {% if message.tags == "error" %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                 style="min-width: 300px; box-shadow: 0px 4px 12px rgba(0,0,0,0.2); margin-bottom: 10px;">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"
-                        style="background: none; border: none; font-size: 20px;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% elif message.tags == "success" %}
-            <div class="alert alert-success alert-dismissible fade show" role="alert"
-                 style="min-width: 300px; box-shadow: 0px 4px 12px rgba(0,0,0,0.2); margin-bottom: 10px;">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"
-                        style="background: none; border: none; font-size: 20px;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% else %}
-            <div class="alert alert-info alert-dismissible fade show" role="alert"
-                 style="min-width: 300px; box-shadow: 0px 4px 12px rgba(0,0,0,0.2); margin-bottom: 10px;">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"
-                        style="background: none; border: none; font-size: 20px;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endif %}
-    {% endfor %}
-</div>
+    {% if messages %}
+    <div
+      id="popup-messages"
+      style="
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        text-align: center;
+      "
+    >
+      {% for message in messages %} {% if message.tags == "error" %}
+      <div
+        class="alert alert-danger alert-dismissible fade show"
+        role="alert"
+        style="
+          min-width: 300px;
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+          margin-bottom: 10px;
+        "
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+          style="background: none; border: none; font-size: 20px"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% elif message.tags == "success" %}
+      <div
+        class="alert alert-success alert-dismissible fade show"
+        role="alert"
+        style="
+          min-width: 300px;
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+          margin-bottom: 10px;
+        "
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+          style="background: none; border: none; font-size: 20px"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% else %}
+      <div
+        class="alert alert-info alert-dismissible fade show"
+        role="alert"
+        style="
+          min-width: 300px;
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+          margin-bottom: 10px;
+        "
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+          style="background: none; border: none; font-size: 20px"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endif %} {% endfor %}
+    </div>
 
-<script>
-    setTimeout(() => {
+    <script>
+      setTimeout(() => {
         const popup = document.getElementById("popup-messages");
         if (popup) popup.style.display = "none";
-    }, 4000);
-</script>
-{% endif %}
-
+      }, 4000);
+    </script>
+    {% endif %}
   </body>
 </html>

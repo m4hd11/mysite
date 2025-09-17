@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.urls import reverse
 
 # Create your views here.
@@ -50,14 +51,29 @@ def logout_View(request):
     return redirect('/')
 
 def signup_View(request):
-    if not request.user.is_authenticated:
-        if request.method == "POST":
-            form = UserCreationForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect(reverse('accounts:login'))
-        form = UserCreationForm()
-        context = {'form': form}
-        return render(request, 'accounts/signup.html', context)
-    else:
+    if request.user.is_authenticated:
         return redirect('/')
+    
+    if request.method == "POST":
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+
+        # چک کردن پسوردها
+        if password1 != password2:
+            messages.error(request, "Passwords do not match!")
+        elif len(password1) < 8:
+            messages.error(request, "Password too weak! Minimum 8 characters.")
+        elif User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists!")
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists!")
+        else:
+            # ساخت کاربر
+            user = User.objects.create_user(username=username, email=email, password=password1)
+            return redirect('accounts:login')
+
+    form = UserCreationForm()  # فقط برای قالب
+    context = {'form': form}
+    return render(request, 'accounts/signup.html', context)
