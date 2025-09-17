@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from website.models import Contact
 from website.forms import ContactForm, NewsletterForm
@@ -46,7 +46,14 @@ def newsletter_view(request):
         form = NewsletterForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
+            messages.success(request, "Subscribed successfully!")
         else:
-            return HttpResponseRedirect('/')
+            messages.error(request, "Please enter a valid email!")
+
+        # بازگشت به همان فرم sidebar
+        referer = request.META.get('HTTP_REFERER', '/')
+        if '#' in referer:
+            # اگر anchor دارد، اضافه نکن
+            return redirect(referer)
+        return redirect(referer + '#sidebar-newsletter')
 
