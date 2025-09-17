@@ -53,10 +53,10 @@ def logout_View(request):
 def signup_View(request):
     if request.user.is_authenticated:
         return redirect('/')
-    
+
     if request.method == "POST":
-        username = request.POST.get('username')
-        email = request.POST.get('email')
+        username = request.POST.get('username').lower()  # تبدیل به lowercase
+        email = request.POST.get('email').lower()        # تبدیل به lowercase
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
 
@@ -65,9 +65,9 @@ def signup_View(request):
             messages.error(request, "Passwords do not match!")
         elif len(password1) < 8:
             messages.error(request, "Password too weak! Minimum 8 characters.")
-        elif User.objects.filter(username=username).exists():
+        elif User.objects.filter(username__iexact=username).exists():
             messages.error(request, "Username already exists!")
-        elif User.objects.filter(email=email).exists():
+        elif User.objects.filter(email__iexact=email).exists():
             messages.error(request, "Email already exists!")
         else:
             # ساخت کاربر
