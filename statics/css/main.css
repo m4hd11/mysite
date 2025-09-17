@@ -2095,11 +2095,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main-menu {
-  padding-bottom: 20px;
-  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-top: 10px;
   background: rgba(255, 255, 255, 0.15);
   padding-left: 15px;
   padding-right: 15px;
+  margin-top: 20px;
 }
 
 #header {
@@ -2370,7 +2371,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #logo {
-  padding-left: 15px;
+  scale: 0.8;
 }
 
 #nav-menu-container {
@@ -4518,3 +4519,62 @@ body.mobile-nav-active #mobile-nav-toggle {
 .footer-text a, .footer-text i {
   color: #f8b600;
 }
+
+
+/* login and logout button style */
+
+.header-top .auth-buttons {
+    display: inline-flex;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-top: 7px;
+}
+
+.header-top .auth-buttons a {
+    padding: 8px 20px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: none;
+}
+
+.header-top .auth-buttons a.login {
+    background-color: rgba(255,255,255,0.4);
+    color: #333;
+}
+.header-top .auth-buttons a.login:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.header-top .auth-buttons a.signup {
+    background-color: rgba(76,175,80,0.15);
+    color: #4CAF50;
+}
+.header-top .auth-buttons a.signup:hover {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.header-top .auth-buttons a.user-info {
+    background-color: rgba(255,255,255,0.4);
+    color: #333;
+}
+.header-top .auth-buttons a.user-info:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.header-top .auth-buttons a.logout {
+    background-color: rgba(244,67,54,0.15);
+    color: #f44336;
+}
+.header-top .auth-buttons a.logout:hover {
+    background-color: #f44336;
+    color: #fff;
+}
+
+
