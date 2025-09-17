@@ -2471,6 +2471,14 @@ body.mobile-nav-active #mobile-nav-toggle {
   bottom: 0;
 }
 
+@media screen and (max-width: 768px) {
+  .text-white {
+    margin-top: 180px;
+  }
+}
+  
+
+
 .section-title {
   text-align: center;
   display: block;
@@ -4568,14 +4576,32 @@ body.mobile-nav-active #mobile-nav-toggle {
     background-color: #fff;
     color: #000;
 }
-
+@media screen and (max-width: 768px) {
+    .header-top .auth-buttons a.user-info {
+        display: inline-block;
+        white-space: nowrap;
+    }
+  }
 .header-top .auth-buttons a.logout {
     background-color: rgba(244,67,54,0.15);
     color: #f44336;
 }
+
+
 .header-top .auth-buttons a.logout:hover {
     background-color: #f44336;
     color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .header-top .auth-buttons a.logout {
+        display: inline-block;
+        white-space: nowrap;
+    }
+    .header-top .auth-buttons a.logout:hover {
+    background-color: #f44336;
+    color: #fff;
+}
 }
 
 
