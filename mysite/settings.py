@@ -177,5 +177,4 @@ INTERNAL_IPS = [
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
