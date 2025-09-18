@@ -44,3 +44,20 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'mail.travelistaa.ir'
+# EMAIL_PORT = 465
+# EMAIL_USE_SSL = True
+# EMAIL_USE_TLS = False
+# EMAIL_HOST_USER = 'no-reply@travelistaa.ir'
+# EMAIL_HOST_PASSWORD = 'h3hJcJa$a6dx'
+# DEFAULT_FROM_EMAIL = 'no-reply@travelistaa.ir'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'mahdi.irp.pv@gmail.com'
+EMAIL_HOST_PASSWORD = 'kpmajciapsuntybe'
+DEFAULT_FROM_EMAIL = 'mahdi.irp.pv@gmail.com'
+
