@@ -53,11 +53,13 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 # EMAIL_HOST_PASSWORD = 'h3hJcJa$a6dx'
 # DEFAULT_FROM_EMAIL = 'no-reply@travelistaa.ir'
 
+from decouple import config
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mahdi.irp.pv@gmail.com'
-EMAIL_HOST_PASSWORD = 'kpmajciapsuntybe'
-DEFAULT_FROM_EMAIL = 'mahdi.irp.pv@gmail.com'
+EMAIL_HOST_USER = config('EMAIL_DJANGO_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_DJANGO_PASSWORD')
+DEFAULT_FROM_EMAIL = config('EMAIL_DJANGO_USER')
 
