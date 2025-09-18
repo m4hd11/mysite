@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{% static 'css/login-style.css' %}">
+	<link rel="shortcut icon" href="{% static 'img/fav.png' %}" />
 
 	<style>
 		.popup-message {
@@ -63,7 +64,7 @@
 									</label>
 								</div>
 								<div class="w-50 text-md-right">
-									<a href="{% url 'accounts:password_reset' %}" style="color: #fff">Forgot Password</a>
+									<a href="{% url 'accounts:password_reset' %}" style="color: #fff; margin-right: 20px;">Forgot Password</a>
 								</div>
 	            </div>
 
