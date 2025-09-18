@@ -40,4 +40,7 @@ STATICFILES_DIRS = [
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-CSRF_TRUSTED_ORIGINS = ['https://410cb00f12fb.ngrok-free.app']
+# CSRF_TRUSTED_ORIGINS = ['https://410cb00f12fb.ngrok-free.app']
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
