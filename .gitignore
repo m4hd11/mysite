@@ -180,4 +180,6 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+.sftp.json
 sftp.json
+./sftp.json
