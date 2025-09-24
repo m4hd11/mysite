@@ -56,4 +56,7 @@ def newsletter_view(request):
             # اگر anchor دارد، اضافه نکن
             return redirect(referer)
         return redirect(referer + '#sidebar-newsletter')
+    
+def coming_soon_view(request):
+    return render(request, 'website/coming_soon.html')
 
