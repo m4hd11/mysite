@@ -8,14 +8,13 @@ from decouple import config
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = False
 ALLOWED_HOSTS = ['travelistaa.ir', 'www.travelistaa.ir']
 
-# INSTALLED_APPS = []
+INSTALLED_APPS += ['django.contrib.sites']
 
 # sites framework
-SITE_ID = 2
+SITE_ID = 1
 
 
 # Database
@@ -43,7 +42,7 @@ SESSION_COOKIE_SECURE = True
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'mail.travelistaa.ir'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_DJANGO_USER')
