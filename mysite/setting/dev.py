@@ -40,26 +40,4 @@ STATICFILES_DIRS = [
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-# CSRF_TRUSTED_ORIGINS = ['https://410cb00f12fb.ngrok-free.app']
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'mail.travelistaa.ir'
-# EMAIL_PORT = 465
-# EMAIL_USE_SSL = True
-# EMAIL_USE_TLS = False
-# EMAIL_HOST_USER = 'no-reply@travelistaa.ir'
-# EMAIL_HOST_PASSWORD = 'h3hJcJa$a6dx'
-# DEFAULT_FROM_EMAIL = 'no-reply@travelistaa.ir'
-
-from decouple import config
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = config('EMAIL_DJANGO_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_DJANGO_PASSWORD')
-DEFAULT_FROM_EMAIL = config('EMAIL_DJANGO_USER')
 
