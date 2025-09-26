@@ -16,7 +16,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # sites framework
-SITE_ID = 2
+SITE_ID = 1
 
 
 # Database
