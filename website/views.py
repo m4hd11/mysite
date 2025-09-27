@@ -50,11 +50,8 @@ def newsletter_view(request):
         else:
             messages.error(request, "Please enter a valid email!")
 
-        # بازگشت به همان فرم sidebar
         referer = request.META.get('HTTP_REFERER', '/')
         if '#' in referer:
-            # اگر anchor دارد، اضافه نکن
             return redirect(referer)
         return redirect(referer + '#sidebar-newsletter')
-    
 

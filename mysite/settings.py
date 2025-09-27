@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',   # فقط همین یکی
     'django.contrib.humanize',
     'django_extensions',
     'django.contrib.sites',
@@ -35,10 +35,12 @@ INSTALLED_APPS = [
     'taggit',
     'django_summernote',
     'widget_tweaks',
+    "compressor",                   # اضافه برای django-compressor
     'website.apps.WebsiteConfig',
     'blog.apps.BlogConfig',
     'accounts.apps.AccountsConfig',
 ]
+
 
 # sites framework
 SITE_ID = 2
@@ -46,6 +48,20 @@ SITE_ID = 2
 #robots.txt framework
 ROBOTS_USE_HOST = True
 ROBOTS_USE_SITEMAP = True
+
+# اضافه کردن finder مربوط به compressor
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
+]
+
+# فعال کردن compress
+COMPRESS_ENABLED = True
+
+COMPRESS_OFFLINE = True
+
+
 
 # summernote configs
 SUMMERNOTE_THEME = 'bs4'
@@ -93,8 +109,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'website.middleware.ComingSoonMiddleware'
+    
 ]
+
+
 
 ROOT_URLCONF = 'mysite.urls'
 
@@ -177,5 +195,8 @@ INTERNAL_IPS = [
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+SECURE_SSL_REDIRECT = True
+
+
 
 
