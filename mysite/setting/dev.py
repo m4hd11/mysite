@@ -1,4 +1,6 @@
 from mysite.settings import *
+from pathlib import Path
+from decouple import config
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -16,7 +18,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # sites framework
-SITE_ID = 1
+SITE_ID = 2
 
 
 # Database
@@ -42,4 +44,5 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+SECURE_SSL_REDIRECT = False
 

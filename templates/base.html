@@ -1,4 +1,5 @@
 {% load static %}
+{% load compress %}
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
   <head>
@@ -25,9 +26,9 @@
       href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
       rel="stylesheet"
     />
-    <!--
-			CSS
-			============================================= -->
+
+    <!-- CSS compressed -->
+    {% compress css %}
     <link rel="stylesheet" href="{% static 'css/linearicons.css' %}" />
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
@@ -37,6 +38,7 @@
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" />
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    {% endcompress %}
   </head>
   <body>
     <header id="header">
@@ -48,15 +50,21 @@
                 {% if request.user.is_authenticated %}
                 <li>
                   <div class="auth-buttons">
-                    <a href="#" class="user-info">Logged in as {{ request.user.username }}</a>
-                    <a href="{% url 'accounts:logout' %}" class="logout">Logout</a>
+                    <a href="#" class="user-info"
+                      >Logged in as {{ request.user.username }}</a
+                    >
+                    <a href="{% url 'accounts:logout' %}" class="logout"
+                      >Logout</a
+                    >
                   </div>
                 </li>
                 {% else %}
                 <li>
                   <div class="auth-buttons">
                     <a href="{% url 'accounts:login' %}" class="login">Login</a>
-                    <a href="{% url 'accounts:signup' %}" class="signup">Signup</a>
+                    <a href="{% url 'accounts:signup' %}" class="signup"
+                      >Signup</a
+                    >
                   </div>
                 </li>
                 {% endif %}
@@ -94,7 +102,7 @@
     </header>
     <!-- #header -->
 
-    {% block content %} {% endblock %}
+    {% block content %}{% endblock %}
 
     <!-- start footer Area -->
     <footer class="footer-area section-gap">
@@ -179,7 +187,6 @@
           class="row footer-bottom d-flex justify-content-between align-items-center"
         >
           <p class="col-lg-8 col-sm-12 footer-text m-0">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             Copyright &copy;
             <script>
               document.write(new Date().getFullYear());
@@ -187,7 +194,6 @@
             All rights reserved | This template is made with
             <i class="fa fa-heart-o" aria-hidden="true"></i> by
             <a href="https://github.com/m4hd11" target="_blank">m4hd11</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
           </p>
           <div class="col-lg-4 col-sm-12 footer-social">
             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -200,10 +206,11 @@
     </footer>
     <!-- End footer Area -->
 
+    <!-- JS compressed -->
+    {% compress js %}
     <script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
     <script src="{% static 'js/jquery-ui.js' %}"></script>
     <script src="{% static 'js/easing.min.js' %}"></script>
     <script src="{% static 'js/hoverIntent.js' %}"></script>
@@ -214,6 +221,11 @@
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/mail-script.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    {% endcompress %}
+
+    <!-- فایل‌های خارجی نباید داخل compress باشند -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+
     {% if messages %}
     <div
       id="popup-messages"
@@ -226,72 +238,31 @@
         text-align: center;
       "
     >
-      {% for message in messages %} {% if message.tags == "error" %}
-      <div
-        class="alert alert-danger alert-dismissible fade show"
-        role="alert"
-        style="
-          min-width: 300px;
-          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-          margin-bottom: 10px;
-        "
-      >
-        {{ message }}
-        <button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-          style="background: none; border: none; font-size: 20px"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      {% elif message.tags == "success" %}
-      <div
-        class="alert alert-success alert-dismissible fade show"
-        role="alert"
-        style="
-          min-width: 300px;
-          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-          margin-bottom: 10px;
-        "
-      >
-        {{ message }}
-        <button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-          style="background: none; border: none; font-size: 20px"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      {% else %}
-      <div
-        class="alert alert-info alert-dismissible fade show"
-        role="alert"
-        style="
-          min-width: 300px;
-          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-          margin-bottom: 10px;
-        "
-      >
-        {{ message }}
-        <button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-          style="background: none; border: none; font-size: 20px"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      {% endif %} {% endfor %}
+      {% for message in messages %}
+        {% if message.tags == "error" %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% elif message.tags == "success" %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% else %}
+          <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
-
     <script>
       setTimeout(() => {
         const popup = document.getElementById("popup-messages");
